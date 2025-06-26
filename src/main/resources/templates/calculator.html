@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>계산기</title>
+    <style>
+        @font-face {
+    font-family: 'Ownglyph_ParkDaHyun';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2411-3@1.0/Ownglyph_ParkDaHyun.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+        @font-face {
+    font-family: 'Ownglyph_corncorn-Rg';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2412-1@1.0/Ownglyph_corncorn-Rg.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+        body {
+            font-family: Ownglyph_corncorn-Rg;
+            background-color: #fff40f;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            background: #4DA0B0;
+            color: #0f9b0f;
+            max-width: 200px;
+            margin: 5px auto;
+            text-align: center;
+        }
+
+        form {
+            background: #4DA0B0;
+            padding: 20px;
+            border-radius: 50px;
+            color: #ec38bc;
+            box-shadow: 3px 2px 4px rgba(0,0,0,0.8);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input, select {
+            width: 100%;
+            color: #4B79A1;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            font-size: 24px;
+        }
+
+        button {
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .result, .error {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .result {
+            background-color: #D39D38;
+        }
+
+        .error {
+            background-color: #5614B0;
+            color: #c31432;
+        }
+
+    </style>
+
+</head>
+<body>
+<h1>계산기</h1>
+<form th:action="@{/calculate}" method="post">
+    <label for="num1">Number 1:</label>
+    <input type="number" step="any" id="num1" name="num1" required/>
+
+    <label for="num2">Number 2:</label>
+    <input type="number" step="any" id="num2" name="num2" required/>
+
+    <label for="operation">operation:</label>
+    <select id="operation" name="operation">
+        <option value="add">Add (+)</option>
+        <option value="subtract">Subtract (-)</option>
+        <option value="multiply">Multiply (×)</option>
+        <option value="divide">Divide (÷)</option>
+    </select>
+
+    <button type="submit" STYLE="font-family: Ownglyph_ParkDaHyun">Calculate</button>
+</form>
+
+<div th:if="${result}" class="result">
+    <h2>Result: <span th:text="${result}"></span></h2>
+</div>
+
+<div th:if="${errorMessage}" class="error">
+    <h2>Error: <span th:text="${errorMessage}"></span></h2>
+</div>
+</body>
+</html>
